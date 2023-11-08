@@ -6,3 +6,4 @@
 - Copy env.example to .env
 - Edit .env and add your database credentials
 - Run `php artisan key:generate`
+- Run `php artisan migrate --seed`
