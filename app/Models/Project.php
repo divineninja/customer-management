@@ -11,12 +11,11 @@ class Project extends Model
 
     protected $fillable = [
         'customer_id',
-        'event',
+        'event_id',
+        'task_id',
         'event_date',
         'venue',
-        'task',
         'galleries',
-
         'shoulder',
         'upper_bust',
         'bust',

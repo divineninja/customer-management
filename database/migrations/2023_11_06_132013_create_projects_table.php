@@ -12,12 +12,9 @@ return new class () extends Migration {
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
-            $table->string('event');
+            
             $table->date('event_date');
             $table->string('venue');
-            $table->string('task');
-            
             $table->text('galleries');
 
             // details
@@ -45,7 +42,7 @@ return new class () extends Migration {
             $table->string('wrist')->nullable();
             $table->string('neck')->nullable();
             $table->string('head')->nullable();
-            
+
             $table->timestamps();
         });
     }

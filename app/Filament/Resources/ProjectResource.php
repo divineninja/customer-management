@@ -22,7 +22,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-paper-clip';
 
     public static function form(Form $form): Form
     {
@@ -36,19 +36,13 @@ class ProjectResource extends Resource
             ->columns(ProjectForm::table())
             ->filters([
                 SelectFilter::make('task')
-                    ->options([
-                        'Wedding Dress' => 'Wedding Dress',
-                        'Suite' => 'Suite',
-                        'Entourage' => 'Entourage',
-                        'Hair and Makeup' => 'Hair and Makeup',
-                        'Makeup' => 'Makeup',
-                        'Bride\'s Makeup' => 'Bride\'s Makeup',
-                        'Entourage Makeup' => 'Entourage Makeup',
-                        'Wedding Planning' => 'Wedding Planning',
-                    ]),
+                    ->relationship('task', 'name'),
+                SelectFilter::make('event')
+                    ->relationship('event', 'name'),
                 SelectFilter::make('customer')
                     ->relationship('customer', 'name')
-                    ->searchable()
+                    ->searchable(),
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

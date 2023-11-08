@@ -28,51 +28,50 @@ class ProjectForm implements FormInterface
                         ->searchable(['name', 'email'])
                         ->createOptionForm(CustomerForm::form())
                         ->required(),
-                    Select::make('event')
-                        ->relationship(name: 'event', titleAttribute: 'name')
-                        ->createOptionForm([
-                            TextInput::make('name')
-                        ])
-                        ->required(),
-                    Select::make('task')
-                        ->relationship(name: 'task', titleAttribute: 'name')
-                        ->createOptionForm([
-                            TextInput::make('name')
-                        ])
-                        ->required(),
-                    DatePicker::make('event_date')
-                        ->required(),
-                    TextInput::make('venue')
-                        ->required()
-                        ->placeholder('Location'),
-
-                ]),
-
-                Section::make('Measurement')
-                    ->description('Please provide precise measurements for the order. Accurate measurements are crucial to ensure the final product fits perfectly and meets your expectations. Double-check your measurements and provide any additional notes or specifications if necessary.')
-                    ->schema([
-                        ...self::prepareForm(),
+                Select::make('event_id')
+                    ->relationship(name: 'event', titleAttribute: 'name')
+                    ->createOptionForm([
+                        TextInput::make('name')
                     ])
-                    ->columns(2),
-
-                Section::make('Galleries')
-                    ->description('Upload your files here')
-                    ->schema([
-                        FileUpload::make('galleries')
-                                ->imagePreviewHeight('250')
-                                ->multiple()
-                                ->image()
-                                ->imageEditor()
-                                ->columns(1)
-                                ->directory('project')
-                                ->openable()
-                                ->imageEditorAspectRatios([
-                                    '16:9',
-                                    '4:3',
-                                    '1:1',
-                                ])
-
+                    ->required(),
+                Select::make('task_id')
+                    ->relationship(name: 'task', titleAttribute: 'name')
+                    ->createOptionForm([
+                        TextInput::make('name')
                     ])
+                    ->required(),
+                DatePicker::make('event_date')
+                    ->required(),
+                TextInput::make('venue')
+                    ->required()
+                    ->placeholder('Location'),
+            ]),
+
+            Section::make('Measurement')
+                ->description('Please provide precise measurements for the order. Accurate measurements are crucial to ensure the final product fits perfectly and meets your expectations. Double-check your measurements and provide any additional notes or specifications if necessary.')
+                ->schema([
+                    ...self::prepareForm(),
+                ])
+                ->columns(2),
+
+            Section::make('Galleries')
+                ->description('Upload your files here')
+                ->schema([
+                    FileUpload::make('galleries')
+                            ->imagePreviewHeight('250')
+                            ->multiple()
+                            ->image()
+                            ->imageEditor()
+                            ->columns(1)
+                            ->directory('project')
+                            ->openable()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
+
+                ])
         ];
 
 
@@ -84,20 +83,10 @@ class ProjectForm implements FormInterface
     {
         return [
                 TextColumn::make('customer.name'),
-                SelectColumn::make('task')
-                ->options([
-                    'Wedding Dress' => 'Wedding Dress',
-                    'Suite' => 'Suite',
-                    'Entourage' => 'Entourage',
-                    'Hair and Makeup' => 'Hair and Makeup',
-                    'Makeup' => 'Makeup',
-                    'Bride\'s Makeup' => 'Bride\'s Makeup',
-                    'Entourage Makeup' => 'Entourage Makeup',
-                    'Wedding Planning' => 'Wedding Planning',
-                ]),
+                TextColumn::make('task.name'),
+                TextColumn::make('event.name'),
                 TextColumn::make('event_date'),
                 TextColumn::make('venue'),
-                TextColumn::make('task'),
             ];
     }
 
